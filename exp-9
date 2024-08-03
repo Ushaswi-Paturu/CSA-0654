@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+#define ROWS1 2 
+#define COLS1 3 
+#define ROWS2 3 
+#define COLS2 2 
+
+void multiplyMatrices(int firstMatrix[ROWS1][COLS1], int secondMatrix[ROWS2][COLS2], int resultMatrix[ROWS1][COLS2], int rows1, int cols1, int rows2, int cols2) {
+    for (int i = 0; i < rows1; i++) {
+        for (int j = 0; j < cols2; j++) {
+            resultMatrix[i][j] = 0;
+            for (int k = 0; k < cols1; k++) {
+                resultMatrix[i][j] += firstMatrix[i][k] * secondMatrix[k][j];
+            }
+        }
+    }
+}
+
+int main() {
+    int firstMatrix[ROWS1][COLS1] = {{1, 2, 3}, {4, 5, 6}};
+    int secondMatrix[ROWS2][COLS2] = {{7, 8}, {9, 10}, {11, 12}};
+    int resultMatrix[ROWS1][COLS2]; 
+
+    if (COLS1 != ROWS2) {
+        printf("Matrices cannot be multiplied\n");
+        return 0;
+    }
+
+    multiplyMatrices(firstMatrix, secondMatrix, resultMatrix, ROWS1, COLS1, ROWS2, COLS2);
+
+    printf("Result matrix:\n");
+    for (int i = 0; i < ROWS1; i++) {
+        for (int j = 0; j < COLS2; j++) {
+            printf("%d ", resultMatrix[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
